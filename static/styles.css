@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Logs</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>Access Logs</h1>
+
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% endif %}
+
+    {% if not authorized %}
+        <form method="post" action="/admin">
+            <label for="password">Admin Password</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">View Logs</button>
+        </form>
+    {% else %}
+        {% if logs %}
+            <table>
+                <thead>
+                <tr>
+                    <th>Timestamp (UTC)</th>
+                    <th>Part Number</th>
+                    <th>Serial Number</th>
+                    <th>Client IP</th>
+                    <th>Success</th>
+                    <th>Message</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for log in logs %}
+                    <tr>
+                        <td>{{ log.timestamp }}</td>
+                        <td>{{ log.part_number }}</td>
+                        <td>{{ log.serial_number }}</td>
+                        <td>{{ log.client_ip }}</td>
+                        <td>{{ log.success }}</td>
+                        <td>{{ log.message }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No logs found.</p>
+        {% endif %}
+    {% endif %}
+</div>
+</body>
+</html>

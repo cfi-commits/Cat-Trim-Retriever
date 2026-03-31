@@ -1,1 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Injector Trim Retrieval</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>Injector Trim Retrieval</h1>
 
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% endif %}
+
+    <form method="post" action="/retrieve">
+        <label for="part_number">Injector Part Number</label>
+        <input type="text" id="part_number" name="part_number" required>
+
+        <label for="serial_number">Injector Serial Number (12-character hex)</label>
+        <input type="text" id="serial_number" name="serial_number" required>
+
+        <button type="submit">Retrieve File</button>
+    </form>
+</div>
+</body>
+</html>
